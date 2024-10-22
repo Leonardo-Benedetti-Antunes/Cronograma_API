@@ -8,11 +8,11 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.Cesurg</groupId>
-	<artifactId>OrganizacaoDeCronograma</artifactId>
+	<groupId>com.cronograma</groupId>
+	<artifactId>Cesurg</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>OrganizacaoDeCronograma</name>
-	<description>Repositório do 2° grupo do trabalho de organização de cronograma da Cesurg.</description>
+	<name>Cesurg</name>
+	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
