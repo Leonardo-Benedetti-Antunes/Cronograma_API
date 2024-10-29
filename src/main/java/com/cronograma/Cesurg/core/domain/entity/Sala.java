@@ -12,7 +12,7 @@ public class Sala {
     @Column (name = "nome")
     private String nome;
     @Column (name ="quantidade_maxima")
-    private int quantidade_maxima;
+    private int quantidadeMaxima;
 
     public int getId() {
         return id;
@@ -30,11 +30,11 @@ public class Sala {
         this.nome = nome;
     }
 
-    public int getQuantidade_maxima() {
-        return quantidade_maxima;
+    public int getQuantidadeMaxima() {
+        return quantidadeMaxima;
     }
 
-    public void setQuantidade_maxima(int quantidade_maxima) {
-        this.quantidade_maxima = quantidade_maxima;
+    public void setQuantidadeMaxima(int quantidadeMaxima) {
+        this.quantidadeMaxima = quantidadeMaxima;
     }
 }
