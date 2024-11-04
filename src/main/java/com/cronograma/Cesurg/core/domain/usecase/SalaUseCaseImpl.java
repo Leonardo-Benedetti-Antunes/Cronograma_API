@@ -38,4 +38,24 @@ public class SalaUseCaseImpl implements SalaUseCase {
     public Sala get(int id) {
         return salaRepository.get(id);
     }
+
+    @Override
+    public void addCategory(int salaID, int categoryID) {
+        salaRepository.addCategory(salaID, categoryID);
+    }
+
+    @Override
+    public List<Sala> fetchCategory(int salaID) {
+        return salaRepository.fetchCategory(salaID);
+    }
+
+    @Override
+    public void addClass(int salaID, int turmaID) {
+        salaRepository.addClass(salaID, turmaID);
+    }
+
+    @Override
+    public List<Sala> fetchClass(int turmaID) {
+        return salaRepository.fetchClass(turmaID);
+    }
 }

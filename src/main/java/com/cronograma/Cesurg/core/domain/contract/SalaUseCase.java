@@ -10,4 +10,8 @@ public interface SalaUseCase {
     public void update (int id, Sala sala);
     public List<Sala> fetch();
     public Sala get(int id);
+    public void addCategory(int salaID, int categoryID);
+    public List<Sala> fetchCategory(int salaID);
+    public void addClass(int salaID, int turmaID);
+    public List<Sala> fetchClass(int turmaID);
 }

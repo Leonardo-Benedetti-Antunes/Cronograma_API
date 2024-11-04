@@ -16,9 +16,8 @@ public class SalaController {
     private SalaUseCase salaUseCase;
 
     @PostMapping("/sala")
-    public Sala insert(@RequestBody Sala sala) {
+    public void insert(@RequestBody Sala sala) {
         salaUseCase.insert(sala);
-        return sala;
     }
 
     @DeleteMapping("/sala/{id}")
@@ -42,5 +41,24 @@ public class SalaController {
         return salaUseCase.get(id);
     }
 
+    @PostMapping("/sala/{salaID}/categoria/{categoryID}")
+    public void addCategory(@PathVariable int salaID, @PathVariable int categoryID) {
+        salaUseCase.addCategory(salaID, categoryID);
+    }
+
+    @GetMapping("/sala/{salaID}/categoria")
+    public List<Sala> fetchCategory(@PathVariable int salaID) {
+        return salaUseCase.fetchCategory(salaID);
+    }
+
+    @PostMapping("/sala/{salaID}/turma/{turmaID}")
+    public void addClass(@PathVariable int salaID, @PathVariable int turmaID) {
+        salaUseCase.addClass(salaID, turmaID);
+    }
+
+    @GetMapping("/sala/{salaID}/turma")
+    public List<Sala> fetchClass(@PathVariable int salaID) {
+        return salaUseCase.fetchClass(salaID);
+    }
 
 }

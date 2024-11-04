@@ -68,4 +68,58 @@ public class SalaRepositoryImpl implements SalaRepository {
                 .setParameter("id", id)
                 .getSingleResult();
     }
+
+    @Transactional
+    @Override
+    public void addCategory(int salaID, int categoryID) {
+        var query = """
+                INSERT INTO sala_categoria (id_sala, id_categoria)
+                VALUES (:salaID, :categoryID);
+                """;
+        entityManager.createNativeQuery(query, Sala.class)
+                .setParameter("salaID", salaID)
+                .setParameter("categoryID", categoryID)
+                .executeUpdate();
+    }
+
+
+    //REVISAR
+    @Override
+    public List<Sala> fetchCategory(int salaID) {
+        var query = """
+                SELECT s.id, s.nome, s.quantidade_maxima, sc.id_categoria FROM sala_categoria sc
+                INNER JOIN sala s ON s.id = sc.id_sala
+                WHERE id_sala = :salaID;
+                """;
+        return entityManager.createNativeQuery(query, Sala.class)
+                .setParameter("salaID", salaID)
+                .getResultList();
+    }
+    //REVISAR
+
+
+    @Transactional
+    @Override
+    public void addClass(int salaID, int turmaID) {
+        var query = """
+                INSERT INTO sala_turma (id_sala, id_turma)
+                VALUES (:salaID, :turmaID);
+                """;
+        entityManager.createNativeQuery(query, Sala.class)
+                .setParameter("salaID", salaID)
+                .setParameter("turmaID", turmaID)
+                .executeUpdate();
+    }
+
+    @Override
+    public List<Sala> fetchClass(int turmaID) {
+        var query = """
+                SELECT s.id, s.nome FROM sala_turma st
+                INNER JOIN sala s ON s.id = st.id_sala
+                WHERE id_turma = :turmaID;
+                """;
+        return entityManager.createNativeQuery(query, Sala.class)
+                .setParameter("turmaID", turmaID)
+                .getResultList();
+    }
 }
