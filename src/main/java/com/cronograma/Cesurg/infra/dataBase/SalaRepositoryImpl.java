@@ -86,14 +86,26 @@ public class SalaRepositoryImpl implements SalaRepository {
     //REVISAR
     @Override
     public List<Sala> fetchCategory(int salaID) {
+
         var query = """
-                SELECT s.id, s.nome, s.quantidade_maxima, sc.id_categoria FROM sala_categoria sc
+                SELECT sc.id, s.nome, s.quantidade_maxima, c.nome AS categoria FROM sala_categoria sc
                 INNER JOIN sala s ON s.id = sc.id_sala
-                WHERE id_sala = :salaID;
+                INNER JOIN categoria c ON c.id = sc.id_categoria
+                WHERE id_sala = :salaID
                 """;
         return entityManager.createNativeQuery(query, Sala.class)
                 .setParameter("salaID", salaID)
                 .getResultList();
+    }
+
+    @Override
+    public void updateCategory(int salaID, Sala sala) {
+
+    }
+
+    @Override
+    public void deleteCategory(int id) {
+
     }
     //REVISAR
 
@@ -114,7 +126,7 @@ public class SalaRepositoryImpl implements SalaRepository {
     @Override
     public List<Sala> fetchClass(int turmaID) {
         var query = """
-                SELECT s.id, s.nome FROM sala_turma st
+                SELECT s.id, s.nome, s.quantidade_maxima FROM sala_turma st
                 INNER JOIN sala s ON s.id = st.id_sala
                 WHERE id_turma = :turmaID;
                 """;
@@ -122,4 +134,15 @@ public class SalaRepositoryImpl implements SalaRepository {
                 .setParameter("turmaID", turmaID)
                 .getResultList();
     }
+
+    @Override
+    public void updateClass(int salaID, Sala sala) {
+
+    }
+
+    @Override
+    public void deleteClass(int id) {
+
+    }
+
 }

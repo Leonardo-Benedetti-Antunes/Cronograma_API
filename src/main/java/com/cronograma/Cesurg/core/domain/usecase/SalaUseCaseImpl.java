@@ -50,6 +50,16 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
+    public void updateCategory(int salaID, Sala sala) {
+
+    }
+
+    @Override
+    public void deleteCategory(int id) {
+
+    }
+
+    @Override
     public void addClass(int salaID, int turmaID) {
         salaRepository.addClass(salaID, turmaID);
     }
@@ -57,5 +67,15 @@ public class SalaUseCaseImpl implements SalaUseCase {
     @Override
     public List<Sala> fetchClass(int turmaID) {
         return salaRepository.fetchClass(turmaID);
+    }
+
+    @Override
+    public void updateClass(int salaID, Sala sala) {
+
+    }
+
+    @Override
+    public void deleteClass(int id) {
+
     }
 }

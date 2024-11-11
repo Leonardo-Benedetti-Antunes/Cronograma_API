@@ -61,7 +61,10 @@ public class TurmaRepositoryImpl implements TurmaRepository {
 
     @Override
     public List<Turma> fetch() {
-        var query = "SELECT * FROM turma;";
+        var query = """
+                SELECT * FROM turma
+                INNER JOIN curso c ON c.id = turma.curso_id
+                """;
         return entityManager.createNativeQuery(query, Turma.class).getResultList();
     }
 

@@ -4,11 +4,16 @@ import com.cronograma.Cesurg.core.domain.contract.SalaUseCase;
 import com.cronograma.Cesurg.core.domain.entity.Professor;
 import com.cronograma.Cesurg.core.domain.entity.Sala;
 import com.cronograma.Cesurg.core.domain.usecase.SalaUseCaseImpl;
+import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class SalaController {
 
@@ -42,8 +47,16 @@ public class SalaController {
     }
 
     @PostMapping("/sala/{salaID}/categoria/{categoryID}")
-    public void addCategory(@PathVariable int salaID, @PathVariable int categoryID) {
-        salaUseCase.addCategory(salaID, categoryID);
+    public ResponseEntity<String> addCategory(@PathVariable int salaID, @PathVariable int categoryID) {
+        try {
+            salaUseCase.addCategory(salaID, categoryID);
+            return new ResponseEntity<>("Sucesso: Sala e categoria vínculadas.", HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(
+                    "Erro: Sala já possui uma vinculação ou ID da sala/categoria não existem."
+                    , HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @GetMapping("/sala/{salaID}/categoria")
