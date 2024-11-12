@@ -14,27 +14,27 @@ public class TurmaUseCaseImpl implements TurmaUseCase {
     private TurmaRepository turmaRepository;
 
     @Override
-    public void insert(Turma turma) {
-        turmaRepository.insert(turma);
+    public void criar(Turma turma) {
+        turmaRepository.criar(turma);
     }
 
     @Override
-    public void delete(int id) {
-        turmaRepository.delete(id);
+    public void deletar(int id) {
+        turmaRepository.deletar(id);
     }
 
     @Override
-    public void update(int id, Turma turma) {
-        turmaRepository.update(id, turma);
+    public void atualizar(int id, Turma turma) {
+        turmaRepository.atualizar(id, turma);
     }
 
     @Override
-    public List<Turma> fetch() {
-        return turmaRepository.fetch();
+    public List<Turma> listar() {
+        return turmaRepository.listar();
     }
 
     @Override
-    public Turma get(int id) {
-        return turmaRepository.get(id);
+    public Turma listarPorID(int id) {
+        return turmaRepository.listarPorID(id);
     }
 }

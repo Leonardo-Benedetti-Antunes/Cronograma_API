@@ -17,7 +17,7 @@ public class TurmaRepositoryImpl implements TurmaRepository {
 
     @Transactional
     @Override
-    public void insert(Turma turma) {
+    public void criar(Turma turma) {
         var query = """
                 INSERT INTO turma(id_curso, nome, quantidade, data_inicio)
                 VALUES (:id_curso, :nome, :quantidade, :data_inicio)
@@ -33,7 +33,7 @@ public class TurmaRepositoryImpl implements TurmaRepository {
 
     @Transactional
     @Override
-    public void delete(int id) {
+    public void deletar(int id) {
         var query = "DELETE FROM turma WHERE id =:id;";
 
         entityManager.createNativeQuery(query, Turma.class).setParameter("id",id).executeUpdate();
@@ -41,7 +41,7 @@ public class TurmaRepositoryImpl implements TurmaRepository {
 
     @Transactional
     @Override
-    public void update(int id, Turma turma) {
+    public void atualizar(int id, Turma turma) {
         var query = """
                 UPDATE turma SET
                 id_curso = :id_curso,
@@ -60,7 +60,7 @@ public class TurmaRepositoryImpl implements TurmaRepository {
     }
 
     @Override
-    public List<Turma> fetch() {
+    public List<Turma> listar() {
         var query = """
                 SELECT * FROM turma
                 INNER JOIN curso c ON c.id = turma.curso_id
@@ -69,7 +69,7 @@ public class TurmaRepositoryImpl implements TurmaRepository {
     }
 
     @Override
-    public Turma get(int id) {
+    public Turma listarPorID(int id) {
         var query = "SELECT * FROM turma WHERE id = :id;";
 
         return (Turma) entityManager.createNativeQuery(query, Turma.class)

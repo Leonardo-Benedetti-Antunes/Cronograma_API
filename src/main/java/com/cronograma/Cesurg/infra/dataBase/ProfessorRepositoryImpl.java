@@ -17,7 +17,7 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
 
     @Transactional
     @Override
-    public void insert(Professor professor) {
+    public void criar(Professor professor) {
         var query = """
                 INSERT INTO professor(nome, descricao, ativo)
                 VALUES (:nome, :descricao, :ativo)
@@ -28,17 +28,19 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
                 .setParameter("descricao",professor.getDescricao())
                 .setParameter("ativo",professor.isAtivo())
                 .executeUpdate();
+
+
     }
     @Transactional
     @Override
-    public void delete(int id) {
+    public void deletar(int id) {
         var query = "DELETE FROM professor WHERE id =:id;";
 
         entityManager.createNativeQuery(query, Professor.class).setParameter("id",id).executeUpdate();
     }
     @Transactional
     @Override
-    public void updateStatus(int id,  Professor professor) {
+    public void atualizarStatus(int id, Professor professor) {
         var query = """
                 UPDATE professor SET 
                 ativo = :ativo
@@ -51,7 +53,7 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
     }
     @Transactional
     @Override
-    public void update(int id, Professor professor) {
+    public void atualizar(int id, Professor professor) {
         var query = """
                 UPDATE professor SET
                 nome = :nome,
@@ -66,14 +68,14 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
     }
 
     @Override
-    public List<Professor> fetch() {
+    public List<Professor> listar() {
         var query = "SELECT * FROM professor;";
 
         return entityManager.createNativeQuery(query, Professor.class).getResultList();
     }
 
     @Override
-    public Professor get(int id) {
+    public Professor listarPorId(int id) {
         var query = "SELECT * FROM professor WHERE id = :id;";
 
         return (Professor) entityManager.createNativeQuery(query, Professor.class)

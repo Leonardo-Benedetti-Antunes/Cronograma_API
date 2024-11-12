@@ -5,17 +5,18 @@ import com.cronograma.Cesurg.core.domain.entity.Sala;
 import java.util.List;
 
 public interface SalaUseCase {
-    public void insert (Sala sala);
-    public void delete (int id);
-    public void update (int id, Sala sala);
-    public List<Sala> fetch();
-    public Sala get(int id);
-    public void addCategory(int salaID, int categoryID);
-    public List<Sala> fetchCategory(int salaID);
-    public void updateCategory(int salaID, Sala sala);
-    public void deleteCategory(int id);
-    public void addClass(int salaID, int turmaID);
-    public List<Sala> fetchClass(int turmaID);
-    public void updateClass(int salaID, Sala sala);
-    public void deleteClass(int id);
+    public void criar(Sala sala);
+    public void deletar(int id);
+    public void atualizar(int id, Sala sala);
+    public List<Sala> listar();
+    public Sala listarPorID(int id);
+    // Fazer vinculos com as tabelas sala_turma e sala_categoria
+    public void adicionarCategoria(int salaID, int categoriaID);
+    public List<Sala> listarCategoria(int salaID);
+    public void atualizarCategoria(int salaID, Sala sala);
+    public void deletarCategoria(int id);
+    public void adicionarTurma(int salaID, int turmaID);
+    public List<Sala> listarTurma(int turmaID);
+    public void atualizarTurma(int salaID, Sala sala);
+    public void deletarTurma(int id);
 }

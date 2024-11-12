@@ -5,9 +5,9 @@ import com.cronograma.Cesurg.core.domain.entity.Turma;
 import java.util.List;
 
 public interface TurmaRepository {
-    public void insert (Turma turma);
-    public void delete (int id);
-    public void update (int id, Turma turma);
-    public List<Turma> fetch();
-    public Turma get(int id);
+    public void criar(Turma turma);
+    public void deletar(int id);
+    public void atualizar(int id, Turma turma);
+    public List<Turma> listar();
+    public Turma listarPorID(int id);
 }

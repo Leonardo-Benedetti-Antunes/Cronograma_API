@@ -14,68 +14,68 @@ public class SalaUseCaseImpl implements SalaUseCase {
     private SalaRepository salaRepository;
 
     @Override
-    public void insert(Sala sala) {
-        salaRepository.insert(sala);
+    public void criar(Sala sala) {
+        salaRepository.criar(sala);
     }
 
     @Override
-    public void delete(int id) {
-        salaRepository.delete(id);
+    public void deletar(int id) {
+        salaRepository.deletar(id);
     }
 
 
     @Override
-    public void update(int id, Sala sala) {
-        salaRepository.update(id, sala);
+    public void atualizar(int id, Sala sala) {
+        salaRepository.atualizar(id, sala);
     }
 
     @Override
-    public List<Sala> fetch() {
-        return salaRepository.fetch();
+    public List<Sala> listar() {
+        return salaRepository.listar();
     }
 
     @Override
-    public Sala get(int id) {
-        return salaRepository.get(id);
+    public Sala listarPorID(int id) {
+        return salaRepository.listarPorID(id);
     }
 
     @Override
-    public void addCategory(int salaID, int categoryID) {
-        salaRepository.addCategory(salaID, categoryID);
+    public void adicionarCategoria(int salaID, int categoryID) {
+        salaRepository.adicionarCategoria(salaID, categoryID);
     }
 
     @Override
-    public List<Sala> fetchCategory(int salaID) {
-        return salaRepository.fetchCategory(salaID);
+    public List<Sala> listarCategoria(int salaID) {
+        return salaRepository.listarCategoria(salaID);
     }
 
     @Override
-    public void updateCategory(int salaID, Sala sala) {
-
+    public void atualizarCategoria(int salaID, Sala sala) {
+        salaRepository.atualizarCategoria(salaID, sala);
     }
 
     @Override
-    public void deleteCategory(int id) {
-
+    public void deletarCategoria(int id) {
+        salaRepository.deletarCategoria(id);
     }
 
     @Override
-    public void addClass(int salaID, int turmaID) {
-        salaRepository.addClass(salaID, turmaID);
+    public void adicionarTurma(int salaID, int turmaID) {
+        salaRepository.adicionarTurma(salaID, turmaID);
     }
 
     @Override
-    public List<Sala> fetchClass(int turmaID) {
-        return salaRepository.fetchClass(turmaID);
+    public List<Sala> listarTurma(int turmaID) {
+        return salaRepository.listarTurma(turmaID);
     }
 
     @Override
-    public void updateClass(int salaID, Sala sala) {
-
+    public void atualizarTurma(int salaID, Sala sala) {
+        salaRepository.atualizarTurma(salaID, sala);
     }
 
     @Override
-    public void deleteClass(int id) {
-
+    public void deletarTurma(int id) {
+        salaRepository.deletarTurma(id);
     }
 }

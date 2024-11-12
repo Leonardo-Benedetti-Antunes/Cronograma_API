@@ -17,7 +17,7 @@ public class SalaRepositoryImpl implements SalaRepository {
 
     @Transactional
     @Override
-    public void insert(Sala sala) {
+    public void criar(Sala sala) {
         var query = """
                 INSERT INTO sala(nome, quantidade_maxima)
                 VALUES (:nome, :quantidade_maxima)
@@ -31,7 +31,7 @@ public class SalaRepositoryImpl implements SalaRepository {
 
     @Transactional
     @Override
-    public void delete(int id) {
+    public void deletar(int id) {
         var query = "DELETE FROM sala WHERE id =:id;";
 
         entityManager.createNativeQuery(query, Sala.class).setParameter("id",id).executeUpdate();
@@ -40,7 +40,7 @@ public class SalaRepositoryImpl implements SalaRepository {
 
     @Transactional
     @Override
-    public void update(int id, Sala sala) {
+    public void atualizar(int id, Sala sala) {
         var query = """
                 UPDATE sala SET
                 nome = :nome,
@@ -55,13 +55,13 @@ public class SalaRepositoryImpl implements SalaRepository {
     }
 
     @Override
-    public List<Sala> fetch() {
+    public List<Sala> listar() {
         var query = "SELECT * FROM sala;";
         return entityManager.createNativeQuery(query, Sala.class).getResultList();
     }
 
     @Override
-    public Sala get(int id) {
+    public Sala listarPorID(int id) {
         var query = "SELECT * FROM sala WHERE id = :id;";
 
         return (Sala) entityManager.createNativeQuery(query, Sala.class)
@@ -71,7 +71,7 @@ public class SalaRepositoryImpl implements SalaRepository {
 
     @Transactional
     @Override
-    public void addCategory(int salaID, int categoryID) {
+    public void adicionarCategoria(int salaID, int categoryID) {
         var query = """
                 INSERT INTO sala_categoria (id_sala, id_categoria)
                 VALUES (:salaID, :categoryID);
@@ -85,26 +85,25 @@ public class SalaRepositoryImpl implements SalaRepository {
 
     //REVISAR
     @Override
-    public List<Sala> fetchCategory(int salaID) {
-
+    public List<Sala> listarCategoria(int salaID) {
         var query = """
-                SELECT sc.id, s.nome, s.quantidade_maxima, c.nome AS categoria FROM sala_categoria sc
-                INNER JOIN sala s ON s.id = sc.id_sala
+                SELECT s.nome AS nome_sala, c.nome AS nome_categoria FROM sala_categoria sc
                 INNER JOIN categoria c ON c.id = sc.id_categoria
+                INNER JOIN sala s ON s.id = sc.id_sala
                 WHERE id_sala = :salaID
                 """;
-        return entityManager.createNativeQuery(query, Sala.class)
+        return entityManager.createNativeQuery(query)
                 .setParameter("salaID", salaID)
                 .getResultList();
     }
 
     @Override
-    public void updateCategory(int salaID, Sala sala) {
+    public void atualizarCategoria(int salaID, Sala sala) {
 
     }
 
     @Override
-    public void deleteCategory(int id) {
+    public void deletarCategoria(int id) {
 
     }
     //REVISAR
@@ -112,7 +111,7 @@ public class SalaRepositoryImpl implements SalaRepository {
 
     @Transactional
     @Override
-    public void addClass(int salaID, int turmaID) {
+    public void adicionarTurma(int salaID, int turmaID) {
         var query = """
                 INSERT INTO sala_turma (id_sala, id_turma)
                 VALUES (:salaID, :turmaID);
@@ -124,7 +123,7 @@ public class SalaRepositoryImpl implements SalaRepository {
     }
 
     @Override
-    public List<Sala> fetchClass(int turmaID) {
+    public List<Sala> listarTurma(int turmaID) {
         var query = """
                 SELECT s.id, s.nome, s.quantidade_maxima FROM sala_turma st
                 INNER JOIN sala s ON s.id = st.id_sala
@@ -136,12 +135,12 @@ public class SalaRepositoryImpl implements SalaRepository {
     }
 
     @Override
-    public void updateClass(int salaID, Sala sala) {
+    public void atualizarTurma(int salaID, Sala sala) {
 
     }
 
     @Override
-    public void deleteClass(int id) {
+    public void deletarTurma(int id) {
 
     }
 
