@@ -4,7 +4,7 @@ import com.cronograma.Cesurg.core.domain.entity.Sala;
 
 import java.util.List;
 
-public interface SalaRepository {
+public interface SalaUseCase {
     public void criar(Sala sala);
     public void deletar(int id);
     public void atualizar(int id, Sala sala);
