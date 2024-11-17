@@ -2,6 +2,8 @@ package com.cronograma.Cesurg.infra.controller;
 
 import com.cronograma.Cesurg.core.domain.contract.SalaUseCase;
 import com.cronograma.Cesurg.core.domain.entity.Sala;
+import com.cronograma.Cesurg.core.dto.SalaCategoriaOutput;
+import com.cronograma.Cesurg.core.dto.SalaTurmaOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +44,7 @@ public class SalaController {
         return salaUseCase.listarPorID(id);
     }
 
-    @PostMapping("/sala/{salaID}/categoria/{categoryID}")
+    @PostMapping("/sala/{salaID}/categoria/{categoriaID}")
     public ResponseEntity<String> adicionarCategoria(@PathVariable int salaID, @PathVariable int categoriaID) {
         try {
             salaUseCase.adicionarCategoria(salaID, categoriaID);
@@ -56,8 +58,14 @@ public class SalaController {
     }
 
     @GetMapping("/sala/{salaID}/categoria")
-    public List<Sala> listarCategoria(@PathVariable int salaID) {
+    public SalaCategoriaOutput listarCategoria(@PathVariable int salaID) {
         return salaUseCase.listarCategoria(salaID);
+    }
+
+    //REVISAR
+    @PutMapping("sala/{salaID}/categoria")
+    public void atualizarCategoria(@PathVariable int salaID, @RequestBody int categoriaID) {
+        salaUseCase.atualizarCategoria(salaID, categoriaID);
     }
 
     @PostMapping("/sala/{salaID}/turma/{turmaID}")
@@ -66,7 +74,7 @@ public class SalaController {
     }
 
     @GetMapping("/sala/{salaID}/turma")
-    public List<Sala> listarTurma(@PathVariable int salaID) {
+    public List<SalaTurmaOutput> listarTurma(@PathVariable int salaID) {
         return salaUseCase.listarTurma(salaID);
     }
 
