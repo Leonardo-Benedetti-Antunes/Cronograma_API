@@ -15,7 +15,6 @@ public class ProfessorUseCaseImpl implements ProfessorUseCase {
     @Autowired
     private ProfessorRepository professorRepository;
 
-
     @Override
     public void criar(Professor professor) {
         professorRepository.criar(professor);

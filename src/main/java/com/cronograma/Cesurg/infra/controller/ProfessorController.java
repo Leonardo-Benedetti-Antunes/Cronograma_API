@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ProfessorController {
     @Autowired
     private ProfessorUseCase professorUseCase;
 
     @PostMapping("/professor")
+  
     public Professor criar(@RequestBody Professor professor) {
         professorUseCase.criar(professor);
         return professor;

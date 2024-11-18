@@ -7,6 +7,7 @@ import com.cronograma.Cesurg.core.domain.entity.Professor;
 import java.util.List;
 
 public interface ProfessorUseCase {
+
     // criar professor
     public void criar (Professor professor);
 

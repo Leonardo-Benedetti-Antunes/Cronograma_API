@@ -30,6 +30,8 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
                 .setParameter("descricao",professor.getDescricao())
                 .setParameter("ativo",professor.isAtivo())
                 .executeUpdate();
+
+
     }
     @Transactional
     @Override
@@ -40,6 +42,7 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
     }
     @Transactional
     @Override
+  
     public void atualizarStatus(int id,  Professor professor) {
         var query = """
                 UPDATE professor SET 
@@ -53,6 +56,7 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
     }
     @Transactional
     @Override
+
     public void atualizarProfesor(int id, Professor professor) {
         var query = """
                 UPDATE professor SET
