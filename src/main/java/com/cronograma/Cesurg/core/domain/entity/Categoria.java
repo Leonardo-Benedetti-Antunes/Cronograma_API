@@ -4,15 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity(name = "sala")
-public class Sala {
+@Entity (name = "categoria")
+public class Categoria {
     @Id
-    @Column(name = "id")
+    @Column (name = "id")
     private int id;
+
     @Column (name = "nome")
     private String nome;
-    @Column (name ="quantidade_maxima")
-    private int quantidadeMaxima;
 
     public int getId() {
         return id;
@@ -28,13 +27,5 @@ public class Sala {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public int getQuantidadeMaxima() {
-        return quantidadeMaxima;
-    }
-
-    public void setQuantidadeMaxima(int quantidadeMaxima) {
-        this.quantidadeMaxima = quantidadeMaxima;
     }
 }
