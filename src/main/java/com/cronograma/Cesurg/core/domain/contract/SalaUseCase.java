@@ -1,6 +1,8 @@
 package com.cronograma.Cesurg.core.domain.contract;
 
 import com.cronograma.Cesurg.core.domain.entity.Sala;
+import com.cronograma.Cesurg.core.dto.SalaCategoriaOutput;
+import com.cronograma.Cesurg.core.dto.SalaTurmaOutput;
 
 import java.util.List;
 
@@ -12,11 +14,11 @@ public interface SalaUseCase {
     public Sala listarPorID(int id);
     // Fazer vinculos com as tabelas sala_turma e sala_categoria
     public void adicionarCategoria(int salaID, int categoriaID);
-    public List<Sala> listarCategoria(int salaID);
-    public void atualizarCategoria(int salaID, Sala sala);
+    public SalaCategoriaOutput listarCategoria(int salaID);
+    public void atualizarCategoria(int salaID, int categoriaID);
     public void deletarCategoria(int id);
     public void adicionarTurma(int salaID, int turmaID);
-    public List<Sala> listarTurma(int turmaID);
+    public List<SalaTurmaOutput> listarTurma(int turmaID);
     public void atualizarTurma(int salaID, Sala sala);
     public void deletarTurma(int id);
 }
