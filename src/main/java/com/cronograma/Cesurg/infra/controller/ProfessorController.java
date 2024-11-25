@@ -1,7 +1,6 @@
 package com.cronograma.Cesurg.infra.controller;
 
 import com.cronograma.Cesurg.core.domain.contract.ProfessorUseCase;
-import com.cronograma.Cesurg.core.domain.entity.DiasdaSemana;
 import com.cronograma.Cesurg.core.domain.entity.Materia;
 import com.cronograma.Cesurg.core.domain.entity.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,16 +44,6 @@ public class ProfessorController {
     @DeleteMapping("/professor/{id}")
     public void deletar(@PathVariable int id) {
         professorUseCase.deletar(id);
-    }
-
-    @GetMapping("/professor/{idProfessor}/dia_semana")
-    public List<DiasdaSemana> listarProfessorDiaa(@PathVariable int idProfessor) {
-        return professorUseCase.listarProfessorDia(idProfessor);
-    }
-
-    @PostMapping("/professor/{idProfessor}/dia_semana/{idDia}")
-    public void adicionarDiaProfessor(@PathVariable int idProfessor, @PathVariable int idDia) {
-        professorUseCase.adicionarDiaProfessor(idProfessor, idDia);
     }
 
     @PostMapping ("/professor/{idProfessor}/materia/{idMateria}")
