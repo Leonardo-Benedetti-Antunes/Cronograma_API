@@ -3,6 +3,7 @@ package com.cronograma.Cesurg.infra.controller;
 import com.cronograma.Cesurg.core.domain.contract.SalaUseCase;
 import com.cronograma.Cesurg.core.domain.entity.Sala;
 import com.cronograma.Cesurg.core.dto.SalaCategoriaOutput;
+import com.cronograma.Cesurg.core.dto.SalaMateriaOutput;
 import com.cronograma.Cesurg.core.dto.SalaTurmaOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,6 @@ public class SalaController {
     public void deletar(@PathVariable int id) {
         salaUseCase.deletar(id);
     }
-
 
     @GetMapping("/sala")
     public List<Sala> listar() {
@@ -76,6 +76,24 @@ public class SalaController {
     @GetMapping("/sala/{salaID}/turma")
     public List<SalaTurmaOutput> listarTurma(@PathVariable int salaID) {
         return salaUseCase.listarTurma(salaID);
+    }
+
+    @PostMapping("/sala/{salaID}/materia/{materiaID}")
+    public ResponseEntity<String> adicionarMateria(@PathVariable int salaID, @PathVariable int materiaID) {
+        try {
+            salaUseCase.adicionarMateria(salaID, materiaID);
+            return new ResponseEntity<>("Sucesso: Sala e categoria vínculadas.", HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(
+                    "Erro: Sala já possui uma vinculação ou ID da sala/categoria não existem."
+                    , HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @GetMapping("/sala/{salaID}/materia")
+    public List<SalaMateriaOutput> listarMateria(@PathVariable int salaID) {
+        return salaUseCase.listarMateria(salaID);
     }
 
 }

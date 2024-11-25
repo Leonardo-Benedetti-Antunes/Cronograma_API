@@ -5,6 +5,7 @@ import com.cronograma.Cesurg.core.domain.entity.Professor;
 import com.cronograma.Cesurg.core.domain.entity.Sala;
 import com.cronograma.Cesurg.core.dto.SalaCategoriaInput;
 import com.cronograma.Cesurg.core.dto.SalaCategoriaOutput;
+import com.cronograma.Cesurg.core.dto.SalaMateriaOutput;
 import com.cronograma.Cesurg.core.dto.SalaTurmaOutput;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -160,5 +161,43 @@ public class SalaRepositoryImpl implements SalaRepository {
     public void deletarTurma(int id) {
 
     }
+
+    @Transactional
+    @Override
+    public void adicionarMateria(int salaID, int materiaID) {
+        var query = """
+                INSERT INTO materia_sala(id_sala, id_materia)
+                VALUES (:salaID, :materiaID);
+                """;
+        entityManager.createNativeQuery(query, Sala.class)
+                .setParameter("salaID", salaID)
+                .setParameter("materiaID", materiaID)
+                .executeUpdate();
+    }
+
+    @Override
+    public List<SalaMateriaOutput> listarMateria(int salaID) {
+        var query = """
+                SELECT sala.nome AS sala, materia.nome AS materia FROM materia_sala mt
+                INNER JOIN sala ON sala.id = mt.id_sala
+                INNER JOIN materia ON materia.id = mt.id_materia
+                WHERE id_sala = :salaID
+                """;
+        return entityManager.createNativeQuery(query, SalaMateriaOutput.class)
+                .setParameter("salaID", salaID)
+                .getResultList();
+    }
+
+    @Transactional
+    @Override
+    public void atualizarMateria(int salaID, Sala sala) {
+
+    }
+
+    @Override
+    public void deletarMateria(int id) {
+
+    }
+
 
 }

@@ -4,6 +4,7 @@ import com.cronograma.Cesurg.core.domain.contract.SalaRepository;
 import com.cronograma.Cesurg.core.domain.contract.SalaUseCase;
 import com.cronograma.Cesurg.core.domain.entity.Sala;
 import com.cronograma.Cesurg.core.dto.SalaCategoriaOutput;
+import com.cronograma.Cesurg.core.dto.SalaMateriaOutput;
 import com.cronograma.Cesurg.core.dto.SalaTurmaOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,8 +68,8 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public List<SalaTurmaOutput> listarTurma(int turmaID) {
-        return salaRepository.listarTurma(turmaID);
+    public List<SalaTurmaOutput> listarTurma(int salaID) {
+        return salaRepository.listarTurma(salaID);
     }
 
     @Override
@@ -80,4 +81,25 @@ public class SalaUseCaseImpl implements SalaUseCase {
     public void deletarTurma(int id) {
         salaRepository.deletarTurma(id);
     }
+
+    @Override
+    public void adicionarMateria(int salaID, int materiaID) {
+        salaRepository.adicionarMateria(salaID, materiaID);
+    }
+
+    @Override
+    public List<SalaMateriaOutput> listarMateria(int salaID) {
+        return salaRepository.listarMateria(salaID);
+    }
+
+    @Override
+    public void atualizarMateria(int salaID, Sala sala) {
+        salaRepository.atualizarMateria(salaID, sala);
+    }
+
+    @Override
+    public void deletarMateria(int id) {
+        salaRepository.deletarMateria(id);
+    }
+
 }
