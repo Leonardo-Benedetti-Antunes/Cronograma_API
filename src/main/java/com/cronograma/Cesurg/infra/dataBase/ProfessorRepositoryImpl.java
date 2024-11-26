@@ -1,7 +1,6 @@
 package com.cronograma.Cesurg.infra.dataBase;
 
 import com.cronograma.Cesurg.core.domain.contract.ProfessorRepository;
-import com.cronograma.Cesurg.core.domain.entity.DiasdaSemana;
 import com.cronograma.Cesurg.core.domain.entity.Materia;
 import com.cronograma.Cesurg.core.domain.entity.Professor;
 import jakarta.persistence.EntityManager;
@@ -21,16 +20,20 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
     @Override
     public void criar(Professor professor) {
         var query = """
-                INSERT INTO professor(nome, descricao, ativo)
-                VALUES (:nome, :descricao, :ativo)
+                INSERT INTO professor(nome, descricao, ativo, segunda, terca, quarta, quinta, sexta)
+                VALUES (:nome, :descricao, :ativo, :segunda, :terca, :quarta, :quinta, :sexta)
                 """;
 
         entityManager.createNativeQuery(query, Professor.class)
                 .setParameter("nome",professor.getNome())
                 .setParameter("descricao",professor.getDescricao())
                 .setParameter("ativo",professor.isAtivo())
+                .setParameter("segunda", professor.isSegunda())
+                .setParameter("terca", professor.isTerca())
+                .setParameter("quarta", professor.isQuarta())
+                .setParameter("quinta", professor.isQuinta())
+                .setParameter("sexta", professor.isSexta())
                 .executeUpdate();
-
 
     }
     @Transactional
@@ -46,12 +49,22 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
     public void atualizarStatus(int id,  Professor professor) {
         var query = """
                 UPDATE professor SET 
-                ativo = :ativo
+                ativo = :ativo,
+                segunda = :segunda,
+                terca = :terca,
+                quarta = :quarta,
+                quinta = :quinta,
+                sexta = :sexta
                 WHERE id = :id
                 """;
         entityManager.createNativeQuery(query, Professor.class)
                 .setParameter("id",id)
                 .setParameter("ativo",professor.isAtivo())
+                .setParameter("segunda", professor.isSegunda())
+                .setParameter("terca", professor.isTerca())
+                .setParameter("quarta", professor.isQuarta())
+                .setParameter("quinta", professor.isQuinta())
+                .setParameter("sexta", professor.isSexta())
                 .executeUpdate();
     }
     @Transactional
@@ -86,31 +99,7 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
                 .setParameter("id", id)
                 .getSingleResult();
     }
-    @Override
-    public List<DiasdaSemana> listarProfessorDia(int idProfessor) {
-        var query = """
-           SELECT ds.id, ds.nome_dia, ds.disponivel FROM professor_dia pd
-           INNER JOIN dias_da_semana ds ON ds.id = pd.id_dia
-           WHERE id_professor = :idProfessor;
-           """;
-        return (List<DiasdaSemana>) entityManager.createNativeQuery(query, DiasdaSemana.class)
-                .setParameter("idProfessor", idProfessor)
-                .getResultList();
-    }
 
-    @Transactional
-    @Override
-    public void adicionarDiaProfessor(int idProfessor, int idDia) {
-        var query = """
-            INSERT INTO professor_dia (id_professor, id_dia) 
-            VALUES (:idProfessor, :idDia);
-            """;
-
-        entityManager.createNativeQuery(query, Professor.class)
-                .setParameter("idProfessor", idProfessor)
-                .setParameter("idDia", idDia)
-                .executeUpdate();
-    }
     @Transactional
     @Override
     public void adicionarMateriaProfessor(int idProfessor, int idMateria) {
