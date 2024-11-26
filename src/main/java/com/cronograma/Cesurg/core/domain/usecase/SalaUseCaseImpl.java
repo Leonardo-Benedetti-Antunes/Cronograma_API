@@ -16,6 +16,7 @@ public class SalaUseCaseImpl implements SalaUseCase {
     @Autowired
     private SalaRepository salaRepository;
 
+    // Métodos básicos de sala
     @Override
     public void criar(Sala sala) {
         salaRepository.criar(sala);
@@ -25,7 +26,6 @@ public class SalaUseCaseImpl implements SalaUseCase {
     public void deletar(int id) {
         salaRepository.deletar(id);
     }
-
 
     @Override
     public void atualizar(int id, Sala sala) {
@@ -42,6 +42,7 @@ public class SalaUseCaseImpl implements SalaUseCase {
         return salaRepository.listarPorID(id);
     }
 
+    // Métodos de sala_categoria
     @Override
     public void adicionarCategoria(int salaID, int categoriaID) {
         salaRepository.adicionarCategoria(salaID, categoriaID);
@@ -50,6 +51,11 @@ public class SalaUseCaseImpl implements SalaUseCase {
     @Override
     public SalaCategoriaOutput listarCategoria(int salaID) {
         return salaRepository.listarCategoria(salaID);
+    }
+
+    @Override
+    public List<SalaCategoriaOutput> listarSalaCategoria() {
+        return salaRepository.listarSalaCategoria();
     }
 
     @Override
@@ -62,6 +68,7 @@ public class SalaUseCaseImpl implements SalaUseCase {
         salaRepository.deletarCategoria(id);
     }
 
+    // Métodos de sala_turma
     @Override
     public void adicionarTurma(int salaID, int turmaID) {
         salaRepository.adicionarTurma(salaID, turmaID);
@@ -70,6 +77,11 @@ public class SalaUseCaseImpl implements SalaUseCase {
     @Override
     public List<SalaTurmaOutput> listarTurma(int salaID) {
         return salaRepository.listarTurma(salaID);
+    }
+
+    @Override
+    public List<SalaTurmaOutput> listarSalaTurma() {
+        return salaRepository.listarSalaTurma();
     }
 
     @Override
@@ -82,6 +94,7 @@ public class SalaUseCaseImpl implements SalaUseCase {
         salaRepository.deletarTurma(id);
     }
 
+    // Métodos de sala_materia
     @Override
     public void adicionarMateria(int salaID, int materiaID) {
         salaRepository.adicionarMateria(salaID, materiaID);
@@ -93,9 +106,15 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public void atualizarMateria(int salaID, Sala sala) {
-        salaRepository.atualizarMateria(salaID, sala);
+    public List<SalaMateriaOutput> listarSalaMateria() {
+        return salaRepository.listarSalaMateria();
     }
+
+    @Override
+    public void atualizarMateria(int salaID, int materiaID) {
+        salaRepository.atualizarMateria(salaID, materiaID);
+    }
+
 
     @Override
     public void deletarMateria(int id) {

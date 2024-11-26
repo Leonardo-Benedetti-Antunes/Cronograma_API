@@ -100,6 +100,17 @@ public class SalaRepositoryImpl implements SalaRepository {
                 .getSingleResult();
     }
 
+    @Override
+    public List<SalaCategoriaOutput> listarSalaCategoria() {
+        var query = """
+                SELECT s.nome AS sala, c.nome AS categoria FROM sala_categoria sc
+                INNER JOIN categoria c ON c.id = sc.id_categoria
+                INNER JOIN sala s ON s.id = sc.id_sala
+                """;
+        return entityManager.createNativeQuery(query, SalaCategoriaOutput.class)
+                .getResultList();
+    }
+
     //REVISAR
     @Transactional
     @Override
@@ -152,6 +163,17 @@ public class SalaRepositoryImpl implements SalaRepository {
                 .getResultList();
     }
 
+    public List<SalaTurmaOutput> listarSalaTurma() {
+        var query = """
+                SELECT sala.nome AS sala, turma.nome AS turma, curso.nome AS curso FROM sala_turma st
+                INNER JOIN sala ON sala.id = st.id_sala
+                INNER JOIN turma ON turma.id = st.id_turma
+                INNER JOIN curso ON curso.id = turma.id_curso
+                """;
+        return entityManager.createNativeQuery(query, SalaTurmaOutput.class)
+                .getResultList();
+    }
+
     @Override
     public void atualizarTurma(int salaID, Sala sala) {
 
@@ -188,9 +210,19 @@ public class SalaRepositoryImpl implements SalaRepository {
                 .getResultList();
     }
 
-    @Transactional
     @Override
-    public void atualizarMateria(int salaID, Sala sala) {
+    public List<SalaMateriaOutput> listarSalaMateria() {
+        var query = """
+                SELECT sala.nome AS sala, materia.nome AS materia FROM materia_sala mt
+                INNER JOIN sala ON sala.id = mt.id_sala
+                INNER JOIN materia ON materia.id = mt.id_materia
+                """;
+        return entityManager.createNativeQuery(query, SalaMateriaOutput.class)
+                .getResultList();
+    }
+
+    @Override
+    public void atualizarMateria(int salaID, int materiaID) {
 
     }
 

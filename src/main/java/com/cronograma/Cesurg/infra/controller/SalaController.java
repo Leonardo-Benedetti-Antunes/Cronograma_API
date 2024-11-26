@@ -19,6 +19,7 @@ public class SalaController {
     @Autowired
     private SalaUseCase salaUseCase;
 
+    //Métodos básico de sala
     @PostMapping("/sala")
     public void criar(@RequestBody Sala sala) {
         salaUseCase.criar(sala);
@@ -44,6 +45,7 @@ public class SalaController {
         return salaUseCase.listarPorID(id);
     }
 
+    // Métodos de sala_categoria
     @PostMapping("/sala/{salaID}/categoria/{categoriaID}")
     public ResponseEntity<String> adicionarCategoria(@PathVariable int salaID, @PathVariable int categoriaID) {
         try {
@@ -62,12 +64,18 @@ public class SalaController {
         return salaUseCase.listarCategoria(salaID);
     }
 
+    @GetMapping("/sala-categoria")
+    public List<SalaCategoriaOutput> listarSalaCategoria() {
+        return salaUseCase.listarSalaCategoria();
+    }
+
     //REVISAR
     @PutMapping("sala/{salaID}/categoria")
     public void atualizarCategoria(@PathVariable int salaID, @RequestBody int categoriaID) {
         salaUseCase.atualizarCategoria(salaID, categoriaID);
     }
 
+    //Métodos de sala_turma
     @PostMapping("/sala/{salaID}/turma/{turmaID}")
     public void adicionarTurma(@PathVariable int salaID, @PathVariable int turmaID) {
         salaUseCase.adicionarTurma(salaID, turmaID);
@@ -78,6 +86,12 @@ public class SalaController {
         return salaUseCase.listarTurma(salaID);
     }
 
+    @GetMapping("/sala-turma")
+    public List<SalaTurmaOutput> listarSalaTurma() {
+        return salaUseCase.listarSalaTurma();
+    }
+
+    //Métodos de sala_materia
     @PostMapping("/sala/{salaID}/materia/{materiaID}")
     public ResponseEntity<String> adicionarMateria(@PathVariable int salaID, @PathVariable int materiaID) {
         try {
@@ -94,6 +108,11 @@ public class SalaController {
     @GetMapping("/sala/{salaID}/materia")
     public List<SalaMateriaOutput> listarMateria(@PathVariable int salaID) {
         return salaUseCase.listarMateria(salaID);
+    }
+
+    @GetMapping("/sala-materia")
+    public List<SalaMateriaOutput> listarSalaMateria() {
+        return salaUseCase.listarSalaMateria();
     }
 
 }

@@ -14,18 +14,21 @@ public interface SalaRepository {
     public List<Sala> listar();
     public Sala listarPorID(int id);
     // Fazer vinculos com as sala_categoria
-    public void adicionarCategoria(int salaID, int categoriaID);
-    public SalaCategoriaOutput listarCategoria(int salaID);
-    public void atualizarCategoria(int salaID, int categoriaID);
-    public void deletarCategoria(int id);
+    public void adicionarCategoria(int salaID, int categoriaID); // Faz a vinculação entre sala e categoria;
+    public SalaCategoriaOutput listarCategoria(int salaID); // Lista a categoria de uma sala
+    public List<SalaCategoriaOutput> listarSalaCategoria(); // Lista todas as vinculações que existem na tabela sala_categoria
+    public void atualizarCategoria(int salaID, int categoriaID); //Em construção...
+    public void deletarCategoria(int id); //Em construção...
     // Fazer vinculos com as tabelas sala_turma
-    public void adicionarTurma(int salaID, int turmaID);
-    public List<SalaTurmaOutput> listarTurma(int salaID);
-    public void atualizarTurma(int salaID, Sala sala);
-    public void deletarTurma(int id);
+    public void adicionarTurma(int salaID, int turmaID); // // Faz a vinculação entre sala e turma;
+    public List<SalaTurmaOutput> listarTurma(int salaID); // Lista a(s) turma(s) de uma sala
+    public List<SalaTurmaOutput> listarSalaTurma(); // Lista todas as vinculações que existem na tabela sala_turma
+    public void atualizarTurma(int salaID, Sala sala); //Em construção...
+    public void deletarTurma(int id); //Em construção...
     // Fazer vinculos com a tabela sala_materia
     public void adicionarMateria(int salaID, int materiaID);
     public List<SalaMateriaOutput> listarMateria(int salaID);
-    public void atualizarMateria(int salaID, Sala sala);
-    public void deletarMateria(int id);
+    public List<SalaMateriaOutput> listarSalaMateria();
+    public void atualizarMateria(int salaID, int materiaID);
+    public void deletarMateria(int id); //Em construção...
 }
