@@ -2,7 +2,6 @@ package com.cronograma.Cesurg.core.domain.usecase;
 
 import com.cronograma.Cesurg.core.domain.contract.ProfessorRepository;
 import com.cronograma.Cesurg.core.domain.contract.ProfessorUseCase;
-import com.cronograma.Cesurg.core.domain.entity.DiasdaSemana;
 import com.cronograma.Cesurg.core.domain.entity.Materia;
 import com.cronograma.Cesurg.core.domain.entity.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,15 +44,6 @@ public class ProfessorUseCaseImpl implements ProfessorUseCase {
         return professorRepository.listarPorId(id);
     }
 
-    @Override
-    public List<DiasdaSemana> listarProfessorDia(int idProfessor) {
-        return professorRepository.listarProfessorDia(idProfessor);
-    }
-
-    @Override
-    public void adicionarDiaProfessor(int idProfessor, int idDia) {
-        professorRepository.adicionarDiaProfessor(idProfessor,idDia);
-    }
 
     @Override
     public void adicionarMateriaProfessor(int idProfessor, int idMateria) {
