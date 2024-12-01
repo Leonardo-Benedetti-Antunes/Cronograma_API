@@ -49,8 +49,8 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public SalaCategoriaOutput listarCategoria(int salaID) {
-        return salaRepository.listarCategoria(salaID);
+    public SalaCategoriaOutput listarSalaCategoriaPorID(int salaID) {
+        return salaRepository.listarSalaCategoriaPorID(salaID);
     }
 
     @Override
@@ -59,8 +59,8 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public void atualizarCategoria(int salaID, int categoriaID) {
-        salaRepository.atualizarCategoria(salaID, categoriaID);
+    public void atualizarCategoria(int id, int categoriaID) {
+        salaRepository.atualizarCategoria(id, categoriaID);
     }
 
     @Override
@@ -75,8 +75,8 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public List<SalaTurmaOutput> listarTurma(int salaID) {
-        return salaRepository.listarTurma(salaID);
+    public List<SalaTurmaOutput> listarSalaTurmaPorID(int salaID) {
+        return salaRepository.listarSalaTurmaPorID(salaID);
     }
 
     @Override
@@ -101,8 +101,8 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public List<SalaMateriaOutput> listarMateria(int salaID) {
-        return salaRepository.listarMateria(salaID);
+    public List<SalaMateriaOutput> listarSalaMateriaPorID(int salaID) {
+        return salaRepository.listarSalaMateriaPorID(salaID);
     }
 
     @Override
@@ -114,7 +114,6 @@ public class SalaUseCaseImpl implements SalaUseCase {
     public void atualizarMateria(int salaID, int materiaID) {
         salaRepository.atualizarMateria(salaID, materiaID);
     }
-
 
     @Override
     public void deletarMateria(int id) {

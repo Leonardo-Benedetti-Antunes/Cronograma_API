@@ -60,8 +60,8 @@ public class SalaController {
     }
 
     @GetMapping("/sala/{salaID}/categoria")
-    public SalaCategoriaOutput listarCategoria(@PathVariable int salaID) {
-        return salaUseCase.listarCategoria(salaID);
+    public SalaCategoriaOutput listarSalaCategoriaPorID(@PathVariable int salaID) {
+        return salaUseCase.listarSalaCategoriaPorID(salaID);
     }
 
     @GetMapping("/sala-categoria")
@@ -70,9 +70,9 @@ public class SalaController {
     }
 
     //REVISAR
-    @PutMapping("sala/{salaID}/categoria")
-    public void atualizarCategoria(@PathVariable int salaID, @RequestBody int categoriaID) {
-        salaUseCase.atualizarCategoria(salaID, categoriaID);
+    @PutMapping("/sala-categoria/{sala-categoriaID}/categoria/{categoriaID}")
+    public void atualizarCategoria(@PathVariable int id, @PathVariable int categoriaID) {
+        salaUseCase.atualizarCategoria(id, categoriaID);
     }
 
     //Métodos de sala_turma
@@ -82,8 +82,8 @@ public class SalaController {
     }
 
     @GetMapping("/sala/{salaID}/turma")
-    public List<SalaTurmaOutput> listarTurma(@PathVariable int salaID) {
-        return salaUseCase.listarTurma(salaID);
+    public List<SalaTurmaOutput> listarSalaTurmaPorID(@PathVariable int salaID) {
+        return salaUseCase.listarSalaTurmaPorID(salaID);
     }
 
     @GetMapping("/sala-turma")
@@ -106,8 +106,8 @@ public class SalaController {
     }
 
     @GetMapping("/sala/{salaID}/materia")
-    public List<SalaMateriaOutput> listarMateria(@PathVariable int salaID) {
-        return salaUseCase.listarMateria(salaID);
+    public List<SalaMateriaOutput> listarSalaMateriaPorID(@PathVariable int salaID) {
+        return salaUseCase.listarSalaMateriaPorID(salaID);
     }
 
     @GetMapping("/sala-materia")

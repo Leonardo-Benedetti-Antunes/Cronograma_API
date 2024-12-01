@@ -3,10 +3,7 @@ package com.cronograma.Cesurg.infra.dataBase;
 import com.cronograma.Cesurg.core.domain.contract.SalaRepository;
 import com.cronograma.Cesurg.core.domain.entity.Professor;
 import com.cronograma.Cesurg.core.domain.entity.Sala;
-import com.cronograma.Cesurg.core.dto.SalaCategoriaInput;
-import com.cronograma.Cesurg.core.dto.SalaCategoriaOutput;
-import com.cronograma.Cesurg.core.dto.SalaMateriaOutput;
-import com.cronograma.Cesurg.core.dto.SalaTurmaOutput;
+import com.cronograma.Cesurg.core.dto.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,9 +85,9 @@ public class SalaRepositoryImpl implements SalaRepository {
 
 
     @Override
-    public SalaCategoriaOutput listarCategoria(int salaID) {
+    public SalaCategoriaOutput listarSalaCategoriaPorID(int salaID) {
         var query = """
-                SELECT s.nome AS sala, c.nome AS categoria FROM sala_categoria sc
+                SELECT sc.id, sc.id_sala, sc.id_categoria, s.nome AS sala, s.quantidade_maxima, c.nome AS categoria FROM sala_categoria sc
                 INNER JOIN categoria c ON c.id = sc.id_categoria
                 INNER JOIN sala s ON s.id = sc.id_sala
                 WHERE id_sala = :salaID
@@ -103,7 +100,7 @@ public class SalaRepositoryImpl implements SalaRepository {
     @Override
     public List<SalaCategoriaOutput> listarSalaCategoria() {
         var query = """
-                SELECT s.nome AS sala, c.nome AS categoria FROM sala_categoria sc
+                SELECT sc.id, sc.id_sala, sc.id_categoria, s.nome AS sala, s.quantidade_maxima, c.nome AS categoria FROM sala_categoria sc
                 INNER JOIN categoria c ON c.id = sc.id_categoria
                 INNER JOIN sala s ON s.id = sc.id_sala
                 """;
@@ -114,15 +111,15 @@ public class SalaRepositoryImpl implements SalaRepository {
     //REVISAR
     @Transactional
     @Override
-    public void atualizarCategoria(int salaID, int categoriaID) {
+    public void atualizarCategoria(int id, int categoriaID) {
         var query = """
                 UPDATE sala_categoria SET
-                id_sala = :id_sala
-                WHERE id_sala = :id_sala
+                id_categoria = :id_categoria
+                WHERE id = :id
                 """;
 
-        entityManager.createNativeQuery(query, SalaCategoriaInput.class)
-            .setParameter("id_sala", salaID)
+        entityManager.createNativeQuery(query, Sala.class)
+            .setParameter("id", id)
             .setParameter("id_categoria", categoriaID)
             .executeUpdate();
     }
@@ -150,9 +147,9 @@ public class SalaRepositoryImpl implements SalaRepository {
     }
 
     @Override
-    public List<SalaTurmaOutput> listarTurma(int salaID) {
+    public List<SalaTurmaOutput> listarSalaTurmaPorID(int salaID) {
         var query = """
-                SELECT sala.nome AS sala, turma.nome AS turma, curso.nome AS curso FROM sala_turma st
+                SELECT st.id, st.id_sala, st.id_turma, sala.nome AS sala, turma.nome AS turma, curso.id, curso.nome AS curso FROM sala_turma st
                 INNER JOIN sala ON sala.id = st.id_sala
                 INNER JOIN turma ON turma.id = st.id_turma
                 INNER JOIN curso ON curso.id = turma.id_curso
@@ -165,7 +162,7 @@ public class SalaRepositoryImpl implements SalaRepository {
 
     public List<SalaTurmaOutput> listarSalaTurma() {
         var query = """
-                SELECT sala.nome AS sala, turma.nome AS turma, curso.nome AS curso FROM sala_turma st
+                SELECT st.id, st.id_sala, st.id_turma, sala.nome AS sala, turma.nome AS turma, curso.id, curso.nome AS curso FROM sala_turma st
                 INNER JOIN sala ON sala.id = st.id_sala
                 INNER JOIN turma ON turma.id = st.id_turma
                 INNER JOIN curso ON curso.id = turma.id_curso
@@ -198,11 +195,11 @@ public class SalaRepositoryImpl implements SalaRepository {
     }
 
     @Override
-    public List<SalaMateriaOutput> listarMateria(int salaID) {
+    public List<SalaMateriaOutput> listarSalaMateriaPorID(int salaID) {
         var query = """
-                SELECT sala.nome AS sala, materia.nome AS materia FROM materia_sala mt
-                INNER JOIN sala ON sala.id = mt.id_sala
-                INNER JOIN materia ON materia.id = mt.id_materia
+                SELECT sm.id, sm.id_sala, sm.id_materia, sala.nome AS sala, sala.quantidade_maxima, materia.nome AS materia FROM materia_sala sm
+                INNER JOIN sala ON sala.id = sm.id_sala
+                INNER JOIN materia ON materia.id = sm.id_materia
                 WHERE id_sala = :salaID
                 """;
         return entityManager.createNativeQuery(query, SalaMateriaOutput.class)
@@ -213,9 +210,9 @@ public class SalaRepositoryImpl implements SalaRepository {
     @Override
     public List<SalaMateriaOutput> listarSalaMateria() {
         var query = """
-                SELECT sala.nome AS sala, materia.nome AS materia FROM materia_sala mt
-                INNER JOIN sala ON sala.id = mt.id_sala
-                INNER JOIN materia ON materia.id = mt.id_materia
+                SELECT sm.id, sm.id_sala, sm.id_materia, sala.nome AS sala, sala.quantidade_maxima, materia.nome AS materia FROM materia_sala sm
+                INNER JOIN sala ON sala.id = sm.id_sala
+                INNER JOIN materia ON materia.id = sm.id_materia
                 """;
         return entityManager.createNativeQuery(query, SalaMateriaOutput.class)
                 .getResultList();
