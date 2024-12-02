@@ -85,8 +85,8 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public void atualizarTurma(int salaID, Sala sala) {
-        salaRepository.atualizarTurma(salaID, sala);
+    public void atualizarTurma(int id, int salaID) {
+        salaRepository.atualizarTurma(id, salaID);
     }
 
     @Override
@@ -111,8 +111,8 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public void atualizarMateria(int salaID, int materiaID) {
-        salaRepository.atualizarMateria(salaID, materiaID);
+    public void atualizarMateria(int id, int materiaID) {
+        salaRepository.atualizarMateria(id, materiaID);
     }
 
     @Override

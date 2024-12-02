@@ -108,30 +108,30 @@ public class SalaRepositoryImpl implements SalaRepository {
                 .getResultList();
     }
 
-    //REVISAR
     @Transactional
     @Override
     public void atualizarCategoria(int id, int categoriaID) {
         var query = """
                 UPDATE sala_categoria SET
-                id_categoria = :id_categoria
+                id_categoria = :categoriaID
                 WHERE id = :id
                 """;
 
-        entityManager.createNativeQuery(query, Sala.class)
+        entityManager.createNativeQuery(query, SalaCategoriaOutput.class)
             .setParameter("id", id)
-            .setParameter("id_categoria", categoriaID)
+            .setParameter("categoriaID", categoriaID)
             .executeUpdate();
+
     }
 
-    //REVISAR
-
-    //REVISAR
+    @Transactional
     @Override
     public void deletarCategoria(int id) {
+        var query = "DELETE FROM sala_categoria WHERE id =:id;";
+
+        entityManager.createNativeQuery(query, SalaCategoriaOutput.class).setParameter("id",id).executeUpdate();
 
     }
-    //REVISAR
 
     @Transactional
     @Override
@@ -171,13 +171,27 @@ public class SalaRepositoryImpl implements SalaRepository {
                 .getResultList();
     }
 
+    @Transactional
     @Override
-    public void atualizarTurma(int salaID, Sala sala) {
+    public void atualizarTurma(int id, int turmaID) {
+        var query = """
+                UPDATE sala_turma SET
+                id_turma = :turmaID
+                WHERE id = :id
+                """;
 
+        entityManager.createNativeQuery(query, SalaTurmaOutput.class)
+                .setParameter("id", id)
+                .setParameter("turmaID", turmaID)
+                .executeUpdate();
     }
 
+    @Transactional
     @Override
     public void deletarTurma(int id) {
+        var query = "DELETE FROM sala_turma WHERE id =:id;";
+
+        entityManager.createNativeQuery(query, SalaTurmaOutput.class).setParameter("id",id).executeUpdate();
 
     }
 
@@ -218,13 +232,27 @@ public class SalaRepositoryImpl implements SalaRepository {
                 .getResultList();
     }
 
+    @Transactional
     @Override
-    public void atualizarMateria(int salaID, int materiaID) {
+    public void atualizarMateria(int id, int materiaID) {
+        var query = """
+                UPDATE materia_sala SET
+                id_materia = :materiaID
+                WHERE id = :id
+                """;
 
+        entityManager.createNativeQuery(query, SalaMateriaOutput.class)
+                .setParameter("id", id)
+                .setParameter("materiaID", materiaID)
+                .executeUpdate();
     }
 
+    @Transactional
     @Override
     public void deletarMateria(int id) {
+        var query = "DELETE FROM materia_sala WHERE id =:id;";
+
+        entityManager.createNativeQuery(query, SalaMateriaOutput.class).setParameter("id",id).executeUpdate();
 
     }
 
