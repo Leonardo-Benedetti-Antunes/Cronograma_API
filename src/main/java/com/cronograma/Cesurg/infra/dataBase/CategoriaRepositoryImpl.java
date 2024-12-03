@@ -17,36 +17,41 @@ public class CategoriaRepositoryImpl implements CategoriaRepository {
 
     @Transactional
     @Override
-    public void criar(Categoria categoria) {
+    public Categoria criar(Categoria categoria) {
         var query = """
                 INSERT INTO categoria(nome)
                 VALUES (:nome)
+                RETURNING *
                 """;
 
-        entityManager.createNativeQuery(query, Categoria.class)
+        return (Categoria) entityManager.createNativeQuery(query, Categoria.class)
                 .setParameter("nome",categoria.getNome())
-                .executeUpdate();
+                .getSingleResult();
     }
 
     @Transactional
     @Override
-    public void deletar(int id) {
-        var query = "DELETE FROM categoria WHERE id =:id;";
-        entityManager.createNativeQuery(query, Categoria.class).setParameter("id",id).executeUpdate();
+    public Categoria deletar(int id) {
+        var query = """
+                DELETE FROM categoria WHERE id =:id
+                RETURNING *;
+                """;
+        return (Categoria) entityManager.createNativeQuery(query, Categoria.class).setParameter("id",id).getSingleResult();
     }
 
     @Transactional
     @Override
-    public void atualizar(int id, Categoria categoria) {
+    public Categoria atualizar(int id, Categoria categoria) {
         var query = """
                 UPDATE categoria SET
                 nome = :nome
                 WHERE id = :id
+                RETURNING *
                 """;
-        entityManager.createNativeQuery(query, Categoria.class)
+        return (Categoria) entityManager.createNativeQuery(query, Categoria.class)
                 .setParameter("nome", categoria.getNome())
                 .setParameter("id", id)
-                .executeUpdate();
+                .getSingleResult();
     }
 
     @Override

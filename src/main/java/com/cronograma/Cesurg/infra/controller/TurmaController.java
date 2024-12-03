@@ -16,18 +16,18 @@ public class TurmaController {
     private TurmaUseCase turmaUseCase;
 
     @PostMapping("/turma")
-    public void criar(@RequestBody Turma turma) {
-        turmaUseCase.criar(turma);
+    public Turma criar(@RequestBody Turma turma) {
+        return turmaUseCase.criar(turma);
     }
 
     @DeleteMapping("/turma/{id}")
-    public void deletar(@PathVariable int id) {
-        turmaUseCase.deletar(id);
+    public Turma deletar(@PathVariable int id) {
+        return turmaUseCase.deletar(id);
     }
 
     @PutMapping("/turma/{id}")
-    public void atualizar(@PathVariable int id, @RequestBody Turma turma) {
-        turmaUseCase.atualizar(id, turma);
+    public Turma atualizar(@PathVariable int id, @RequestBody Turma turma) {
+        return turmaUseCase.atualizar(id, turma);
     }
 
     @GetMapping("/turma")

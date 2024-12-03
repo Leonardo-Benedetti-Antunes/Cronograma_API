@@ -1,10 +1,9 @@
 package com.cronograma.Cesurg.infra.controller;
 
 import com.cronograma.Cesurg.core.domain.contract.SalaUseCase;
+import com.cronograma.Cesurg.core.domain.entity.Categoria;
 import com.cronograma.Cesurg.core.domain.entity.Sala;
-import com.cronograma.Cesurg.core.dto.SalaCategoriaOutput;
-import com.cronograma.Cesurg.core.dto.SalaMateriaOutput;
-import com.cronograma.Cesurg.core.dto.SalaTurmaOutput;
+import com.cronograma.Cesurg.core.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +18,15 @@ public class SalaController {
     @Autowired
     private SalaUseCase salaUseCase;
 
+    //Métodos básico de sala
     @PostMapping("/sala")
-    public void criar(@RequestBody Sala sala) {
-        salaUseCase.criar(sala);
+    public Sala criar(@RequestBody Sala sala) {
+        return salaUseCase.criar(sala);
     }
 
     @DeleteMapping("/sala/{id}")
-    public void deletar(@PathVariable int id) {
-        salaUseCase.deletar(id);
+    public Sala deletar(@PathVariable int id) {
+        return salaUseCase.deletar(id);
     }
 
     @GetMapping("/sala")
@@ -35,8 +35,8 @@ public class SalaController {
     }
 
     @PutMapping("/sala/{id}")
-    public void atualizar(@PathVariable int id, @RequestBody Sala sala) {
-        salaUseCase.atualizar(id, sala);
+    public Sala atualizar(@PathVariable int id, @RequestBody Sala sala) {
+        return salaUseCase.atualizar(id, sala);
     }
 
     @GetMapping("/sala/{id}")
@@ -44,56 +44,82 @@ public class SalaController {
         return salaUseCase.listarPorID(id);
     }
 
+    // Métodos de sala_categoria
     @PostMapping("/sala/{salaID}/categoria/{categoriaID}")
-    public ResponseEntity<String> adicionarCategoria(@PathVariable int salaID, @PathVariable int categoriaID) {
-        try {
-            salaUseCase.adicionarCategoria(salaID, categoriaID);
-            return new ResponseEntity<>("Sucesso: Sala e categoria vínculadas.", HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(
-                    "Erro: Sala já possui uma vinculação ou ID da sala/categoria não existem."
-                    , HttpStatus.BAD_REQUEST);
-        }
-
+    public SalaCategoriaCreat adicionarCategoria(@PathVariable int salaID, @PathVariable int categoriaID) {
+        return salaUseCase.adicionarCategoria(salaID, categoriaID);
     }
 
     @GetMapping("/sala/{salaID}/categoria")
-    public SalaCategoriaOutput listarCategoria(@PathVariable int salaID) {
-        return salaUseCase.listarCategoria(salaID);
+    public SalaCategoriaOutput listarSalaCategoriaPorID(@PathVariable int salaID) {
+        return salaUseCase.listarSalaCategoriaPorID(salaID);
     }
 
-    //REVISAR
-    @PutMapping("sala/{salaID}/categoria")
-    public void atualizarCategoria(@PathVariable int salaID, @RequestBody int categoriaID) {
-        salaUseCase.atualizarCategoria(salaID, categoriaID);
+    @GetMapping("/sala-categoria")
+    public List<SalaCategoriaOutput> listarSalaCategoria() {
+        return salaUseCase.listarSalaCategoria();
     }
 
+    @PutMapping("/sala-categoria/{id}/categoria/{categoriaID}")
+    public SalaCategoriaCreat atualizarCategoria(@PathVariable int id, @PathVariable int categoriaID) {
+        return salaUseCase.atualizarCategoria(id, categoriaID);
+    }
+
+    @DeleteMapping("/sala-categoria/{id}")
+    public SalaCategoriaCreat deletarCategoria(@PathVariable int id) {
+        return salaUseCase.deletarCategoria(id);
+    }
+
+    //Métodos de sala_turma
     @PostMapping("/sala/{salaID}/turma/{turmaID}")
-    public void adicionarTurma(@PathVariable int salaID, @PathVariable int turmaID) {
-        salaUseCase.adicionarTurma(salaID, turmaID);
+    public SalaTurmaCreat adicionarTurma(@PathVariable int salaID, @PathVariable int turmaID) {
+        return salaUseCase.adicionarTurma(salaID, turmaID);
     }
 
     @GetMapping("/sala/{salaID}/turma")
-    public List<SalaTurmaOutput> listarTurma(@PathVariable int salaID) {
-        return salaUseCase.listarTurma(salaID);
+    public List<SalaTurmaOutput> listarSalaTurmaPorID(@PathVariable int salaID) {
+        return salaUseCase.listarSalaTurmaPorID(salaID);
     }
 
-    @PostMapping("/sala/{salaID}/materia/{materiaID}")
-    public ResponseEntity<String> adicionarMateria(@PathVariable int salaID, @PathVariable int materiaID) {
-        try {
-            salaUseCase.adicionarMateria(salaID, materiaID);
-            return new ResponseEntity<>("Sucesso: Sala e categoria vínculadas.", HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(
-                    "Erro: Sala já possui uma vinculação ou ID da sala/categoria não existem."
-                    , HttpStatus.BAD_REQUEST);
-        }
+    @GetMapping("/sala-turma")
+    public List<SalaTurmaOutput> listarSalaTurma() {
+        return salaUseCase.listarSalaTurma();
+    }
 
+    @PutMapping("/sala-turma/{id}/turma/{turmaID}")
+    public SalaTurmaCreat atualizarTurma(@PathVariable int id, @PathVariable int turmaID) {
+        return salaUseCase.atualizarTurma(id, turmaID);
+    }
+
+    @DeleteMapping("/sala-turma/{id}")
+    public SalaTurmaCreat deletarTurma(@PathVariable int id) {
+        return salaUseCase.deletarTurma(id);
+    }
+
+    //Métodos de sala_materia
+    @PostMapping("/sala/{salaID}/materia/{materiaID}")
+    public SalaMateriaCreat adicionarMateria(@PathVariable int salaID, @PathVariable int materiaID) {
+        return salaUseCase.adicionarMateria(salaID, materiaID);
     }
 
     @GetMapping("/sala/{salaID}/materia")
-    public List<SalaMateriaOutput> listarMateria(@PathVariable int salaID) {
-        return salaUseCase.listarMateria(salaID);
+    public List<SalaMateriaOutput> listarSalaMateriaPorID(@PathVariable int salaID) {
+        return salaUseCase.listarSalaMateriaPorID(salaID);
+    }
+
+    @GetMapping("/sala-materia")
+    public List<SalaMateriaOutput> listarSalaMateria() {
+        return salaUseCase.listarSalaMateria();
+    }
+
+    @PutMapping("/sala-materia/{id}/materia/{materiaID}")
+    public SalaMateriaCreat atualizarMateria(@PathVariable int id, @PathVariable int materiaID) {
+        return salaUseCase.atualizarMateria(id, materiaID);
+    }
+
+    @DeleteMapping("/sala-materia/{id}")
+    public SalaMateriaCreat deletarMateria(@PathVariable int id) {
+        return salaUseCase.deletarMateria(id);
     }
 
 }

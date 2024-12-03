@@ -16,18 +16,18 @@ public class CategoriaController {
     private CategoriaUseCase categoriaUseCase;
 
     @PostMapping("/categoria")
-    public void criar(@RequestBody Categoria categoria) {
-        categoriaUseCase.criar(categoria);
+    public Categoria criar(@RequestBody Categoria categoria) {
+        return categoriaUseCase.criar(categoria);
     }
 
     @DeleteMapping("/categoria/{id}")
-    public void deletar(@PathVariable int id) {
-        categoriaUseCase.deletar(id);
+    public Categoria deletar(@PathVariable int id) {
+        return categoriaUseCase.deletar(id);
     }
 
     @PutMapping("/categoria/{id}")
-    public void atualizar(@PathVariable int id, @RequestBody Categoria categoria) {
-        categoriaUseCase.atualizar(id, categoria);
+    public Categoria atualizar(@PathVariable int id, @RequestBody Categoria categoria) {
+       return categoriaUseCase.atualizar(id, categoria);
     }
 
     @GetMapping("/categoria")

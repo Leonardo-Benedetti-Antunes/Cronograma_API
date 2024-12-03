@@ -15,18 +15,18 @@ public class CategoriaUseCaseImpl implements CategoriaUseCase {
     private CategoriaRepository categoriaRepository;
 
     @Override
-    public void criar(Categoria categoria) {
-        categoriaRepository.criar(categoria);
+    public Categoria criar(Categoria categoria) {
+        return categoriaRepository.criar(categoria);
     }
 
     @Override
-    public void deletar(int id) {
-        categoriaRepository.deletar(id);
+    public Categoria deletar(int id) {
+        return categoriaRepository.deletar(id);
     }
 
     @Override
-    public void atualizar(int id, Categoria categoria) {
-        categoriaRepository.atualizar(id, categoria);
+    public Categoria atualizar(int id, Categoria categoria) {
+        return categoriaRepository.atualizar(id, categoria);
     }
 
     @Override
