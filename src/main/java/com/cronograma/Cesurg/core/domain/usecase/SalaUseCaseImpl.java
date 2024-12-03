@@ -3,9 +3,7 @@ package com.cronograma.Cesurg.core.domain.usecase;
 import com.cronograma.Cesurg.core.domain.contract.SalaRepository;
 import com.cronograma.Cesurg.core.domain.contract.SalaUseCase;
 import com.cronograma.Cesurg.core.domain.entity.Sala;
-import com.cronograma.Cesurg.core.dto.SalaCategoriaOutput;
-import com.cronograma.Cesurg.core.dto.SalaMateriaOutput;
-import com.cronograma.Cesurg.core.dto.SalaTurmaOutput;
+import com.cronograma.Cesurg.core.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +16,18 @@ public class SalaUseCaseImpl implements SalaUseCase {
 
     // Métodos básicos de sala
     @Override
-    public void criar(Sala sala) {
-        salaRepository.criar(sala);
+    public Sala criar(Sala sala) {
+        return salaRepository.criar(sala);
     }
 
     @Override
-    public void deletar(int id) {
-        salaRepository.deletar(id);
+    public Sala deletar(int id) {
+        return salaRepository.deletar(id);
     }
 
     @Override
-    public void atualizar(int id, Sala sala) {
-        salaRepository.atualizar(id, sala);
+    public Sala atualizar(int id, Sala sala) {
+        return salaRepository.atualizar(id, sala);
     }
 
     @Override
@@ -44,8 +42,8 @@ public class SalaUseCaseImpl implements SalaUseCase {
 
     // Métodos de sala_categoria
     @Override
-    public void adicionarCategoria(int salaID, int categoriaID) {
-        salaRepository.adicionarCategoria(salaID, categoriaID);
+    public SalaCategoriaCreat adicionarCategoria(int salaID, int categoriaID) {
+        return salaRepository.adicionarCategoria(salaID, categoriaID);
     }
 
     @Override
@@ -59,19 +57,19 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public void atualizarCategoria(int id, int categoriaID) {
-        salaRepository.atualizarCategoria(id, categoriaID);
+    public SalaCategoriaCreat atualizarCategoria(int id, int categoriaID) {
+        return salaRepository.atualizarCategoria(id, categoriaID);
     }
 
     @Override
-    public void deletarCategoria(int id) {
-        salaRepository.deletarCategoria(id);
+    public SalaCategoriaCreat deletarCategoria(int id) {
+        return salaRepository.deletarCategoria(id);
     }
 
     // Métodos de sala_turma
     @Override
-    public void adicionarTurma(int salaID, int turmaID) {
-        salaRepository.adicionarTurma(salaID, turmaID);
+    public SalaTurmaCreat adicionarTurma(int salaID, int turmaID) {
+        return salaRepository.adicionarTurma(salaID, turmaID);
     }
 
     @Override
@@ -85,19 +83,19 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public void atualizarTurma(int id, int salaID) {
-        salaRepository.atualizarTurma(id, salaID);
+    public SalaTurmaCreat atualizarTurma(int id, int salaID) {
+        return salaRepository.atualizarTurma(id, salaID);
     }
 
     @Override
-    public void deletarTurma(int id) {
-        salaRepository.deletarTurma(id);
+    public SalaTurmaCreat deletarTurma(int id) {
+        return salaRepository.deletarTurma(id);
     }
 
     // Métodos de sala_materia
     @Override
-    public void adicionarMateria(int salaID, int materiaID) {
-        salaRepository.adicionarMateria(salaID, materiaID);
+    public SalaMateriaCreat adicionarMateria(int salaID, int materiaID) {
+        return salaRepository.adicionarMateria(salaID, materiaID);
     }
 
     @Override
@@ -111,13 +109,13 @@ public class SalaUseCaseImpl implements SalaUseCase {
     }
 
     @Override
-    public void atualizarMateria(int id, int materiaID) {
-        salaRepository.atualizarMateria(id, materiaID);
+    public SalaMateriaCreat atualizarMateria(int id, int materiaID) {
+        return salaRepository.atualizarMateria(id, materiaID);
     }
 
     @Override
-    public void deletarMateria(int id) {
-        salaRepository.deletarMateria(id);
+    public SalaMateriaCreat deletarMateria(int id) {
+        return salaRepository.deletarMateria(id);
     }
 
 }

@@ -17,31 +17,35 @@ public class TurmaRepositoryImpl implements TurmaRepository {
 
     @Transactional
     @Override
-    public void criar(Turma turma) {
+    public Turma criar(Turma turma) {
         var query = """
                 INSERT INTO turma(id_curso, nome, quantidade, data_inicio)
                 VALUES (:id_curso, :nome, :quantidade, :data_inicio)
+                RETURNING *
                 """;
 
-        entityManager.createNativeQuery(query, Turma.class)
+        return (Turma) entityManager.createNativeQuery(query, Turma.class)
                 .setParameter("id_curso", turma.getIdCurso())
                 .setParameter("nome", turma.getNome())
                 .setParameter("quantidade", turma.getQuantidade())
                 .setParameter("data_inicio", turma.getDataInicio())
-                .executeUpdate();
+                .getSingleResult();
     }
 
     @Transactional
     @Override
-    public void deletar(int id) {
-        var query = "DELETE FROM turma WHERE id =:id;";
+    public Turma deletar(int id) {
+        var query = """
+                DELETE FROM turma WHERE id = :id;
+                RETURNING *
+                """;
 
-        entityManager.createNativeQuery(query, Turma.class).setParameter("id",id).executeUpdate();
+        return (Turma) entityManager.createNativeQuery(query, Turma.class).setParameter("id",id).getSingleResult();
     }
 
     @Transactional
     @Override
-    public void atualizar(int id, Turma turma) {
+    public Turma atualizar(int id, Turma turma) {
         var query = """
                 UPDATE turma SET
                 id_curso = :id_curso,
@@ -49,14 +53,15 @@ public class TurmaRepositoryImpl implements TurmaRepository {
                 quantidade = :quantidade,
                 data_inicio = :data_inicio
                 WHERE id = :id
+                RETURNING *
                 """;
-        entityManager.createNativeQuery(query,Sala.class)
+        return (Turma) entityManager.createNativeQuery(query,Sala.class)
                 .setParameter("id_curso", turma.getIdCurso())
                 .setParameter("nome", turma.getNome())
                 .setParameter("quantidade", turma.getQuantidade())
                 .setParameter("data_inicio", turma.getDataInicio())
                 .setParameter("id", id)
-                .executeUpdate();
+                .getSingleResult();
     }
 
     @Override
