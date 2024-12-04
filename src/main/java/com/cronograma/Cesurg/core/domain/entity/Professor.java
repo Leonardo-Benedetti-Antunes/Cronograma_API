@@ -1,8 +1,13 @@
 package com.cronograma.Cesurg.core.domain.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+
+import java.time.DayOfWeek;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity (name = "professor")
 public class Professor {
@@ -20,6 +25,22 @@ public class Professor {
     private boolean quarta;
     private boolean quinta;
     private boolean sexta;
+
+    @ElementCollection
+    private Set<DayOfWeek> assignedDays = new HashSet<>();
+
+
+    public Professor() {}
+
+    public Professor(String nome, boolean disponibilidadeSegunda, boolean disponibilidadeTerca,
+                     boolean disponibilidadeQuarta, boolean disponibilidadeQuinta, boolean disponibilidadeSexta) {
+        this.nome = nome;
+        this.segunda = disponibilidadeSegunda;
+        this.terca = disponibilidadeTerca;
+        this.quarta = disponibilidadeQuarta;
+        this.quinta = disponibilidadeQuinta;
+        this.sexta = disponibilidadeSexta;
+    }
 
     public boolean isSegunda() {
         return segunda;
@@ -91,5 +112,13 @@ public class Professor {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Set<DayOfWeek> getAssignedDays() {
+        return assignedDays;
+    }
+
+    public void setAssignedDays(Set<DayOfWeek> assignedDays) {
+        this.assignedDays = assignedDays;
     }
 }

@@ -1,7 +1,0 @@
-<solver>
-    <solutionClass>com.cronograma.Cesurg.core.domain.solution.solucao</solutionClass>
-    <entityClass>com.cronograma.Cesurg.core.domain.entity</entityClass>
-    <scoreDirectorFactory>
-        <constraintProviderClass>com.cronograma.Cesurg.core.solver.planningRule.regraDePlanejamento</constraintProviderClass>
-    </scoreDirectorFactory>
-</solver>
