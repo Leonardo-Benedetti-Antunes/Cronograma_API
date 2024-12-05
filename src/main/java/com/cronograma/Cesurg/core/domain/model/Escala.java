@@ -2,6 +2,7 @@ package com.cronograma.Cesurg.core.domain.model;
 
 import com.cronograma.Cesurg.core.domain.entity.Aula;
 import com.cronograma.Cesurg.core.domain.entity.Professor;
+import com.cronograma.Cesurg.core.domain.entity.TurmaOptaPlanner;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
@@ -13,23 +14,20 @@ import java.util.List;
 
 @PlanningSolution
 public class Escala {
-
-    @ValueRangeProvider(id = "professorRange")
-    @ProblemFactCollectionProperty
-    private List<Professor> professores;
-
     @PlanningEntityCollectionProperty
-    private List<Aula> aulas;
+    private List<TurmaOptaPlanner> turmas;
 
-    // Adicione o campo para o score
+    private List<Professor> professores; // Dados fixos, não planejáveis
+
     @PlanningScore
     private HardSoftScore score;
 
-    public Escala() {}
+    public List<TurmaOptaPlanner> getTurmas() {
+        return turmas;
+    }
 
-    public Escala(List<Professor> professores, List<Aula> aulas) {
-        this.professores = professores;
-        this.aulas = aulas;
+    public void setTurmas(List<TurmaOptaPlanner> turmas) {
+        this.turmas = turmas;
     }
 
     public List<Professor> getProfessores() {
@@ -38,14 +36,6 @@ public class Escala {
 
     public void setProfessores(List<Professor> professores) {
         this.professores = professores;
-    }
-
-    public List<Aula> getAulas() {
-        return aulas;
-    }
-
-    public void setAulas(List<Aula> aulas) {
-        this.aulas = aulas;
     }
 
     public HardSoftScore getScore() {

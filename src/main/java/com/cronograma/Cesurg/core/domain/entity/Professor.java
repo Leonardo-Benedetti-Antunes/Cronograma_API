@@ -4,11 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.optaplanner.core.api.domain.entity.PlanningEntity;
+import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 import java.time.DayOfWeek;
 import java.util.HashSet;
 import java.util.Set;
 
+@PlanningEntity
 @Entity (name = "professor")
 public class Professor {
     @Id
@@ -20,66 +23,50 @@ public class Professor {
     private String descricao;
     @Column (name = "ativo")
     private boolean ativo = true;
-    private boolean segunda;
-    private boolean terca;
-    private boolean quarta;
-    private boolean quinta;
-    private boolean sexta;
+    private boolean disponivelSegunda;
+    private boolean disponivelTerca;
+    private boolean disponivelQuarta;
+    private boolean disponivelQuinta;
+    private boolean disponivelSexta;
 
-    @ElementCollection
-    private Set<DayOfWeek> assignedDays = new HashSet<>();
-
-
-    public Professor() {}
-
-    public Professor(String nome, boolean disponibilidadeSegunda, boolean disponibilidadeTerca,
-                     boolean disponibilidadeQuarta, boolean disponibilidadeQuinta, boolean disponibilidadeSexta) {
-        this.nome = nome;
-        this.segunda = disponibilidadeSegunda;
-        this.terca = disponibilidadeTerca;
-        this.quarta = disponibilidadeQuarta;
-        this.quinta = disponibilidadeQuinta;
-        this.sexta = disponibilidadeSexta;
+    public boolean isDisponivelSegunda() {
+        return disponivelSegunda;
     }
 
-    public boolean isSegunda() {
-        return segunda;
+    public void setDisponivelSegunda(boolean disponivelSegunda) {
+        this.disponivelSegunda = disponivelSegunda;
     }
 
-    public void setSegunda(boolean segunda) {
-        this.segunda = segunda;
+    public boolean isDisponivelTerca() {
+        return disponivelTerca;
     }
 
-    public boolean isTerca() {
-        return terca;
+    public void setDisponivelTerca(boolean disponivelTerca) {
+        this.disponivelTerca = disponivelTerca;
     }
 
-    public void setTerca(boolean terca) {
-        this.terca = terca;
+    public boolean isDisponivelQuarta() {
+        return disponivelQuarta;
     }
 
-    public boolean isQuarta() {
-        return quarta;
+    public void setDisponivelQuarta(boolean disponivelQuarta) {
+        this.disponivelQuarta = disponivelQuarta;
     }
 
-    public void setQuarta(boolean quarta) {
-        this.quarta = quarta;
+    public boolean isDisponivelQuinta() {
+        return disponivelQuinta;
     }
 
-    public boolean isQuinta() {
-        return quinta;
+    public void setDisponivelQuinta(boolean disponivelQuinta) {
+        this.disponivelQuinta = disponivelQuinta;
     }
 
-    public void setQuinta(boolean quinta) {
-        this.quinta = quinta;
+    public boolean isDisponivelSexta() {
+        return disponivelSexta;
     }
 
-    public boolean isSexta() {
-        return sexta;
-    }
-
-    public void setSexta(boolean sexta) {
-        this.sexta = sexta;
+    public void setDisponivelSexta(boolean disponivelSexta) {
+        this.disponivelSexta = disponivelSexta;
     }
 
     public int getId() {
@@ -114,11 +101,4 @@ public class Professor {
         this.ativo = ativo;
     }
 
-    public Set<DayOfWeek> getAssignedDays() {
-        return assignedDays;
-    }
-
-    public void setAssignedDays(Set<DayOfWeek> assignedDays) {
-        this.assignedDays = assignedDays;
-    }
 }

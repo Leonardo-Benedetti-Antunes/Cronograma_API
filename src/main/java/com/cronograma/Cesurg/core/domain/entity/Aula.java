@@ -11,6 +11,16 @@ public class Aula {
     @PlanningVariable(valueRangeProviderRefs = "professorRange")
     private Professor professor;
 
+    private int quantidadeDeAulas;
+
+    public int getQuantidadeDeAulas() {
+        return quantidadeDeAulas;
+    }
+
+    public void setQuantidadeDeAulas(int quantidadeDeAulas) {
+        this.quantidadeDeAulas = quantidadeDeAulas;
+    }
+
     public Aula() {}
 
     public Aula(String diaDaSemana) {
