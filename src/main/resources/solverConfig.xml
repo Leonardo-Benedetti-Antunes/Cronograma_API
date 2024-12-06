@@ -1,0 +1,14 @@
+
+
+<solver>
+<solutionClass>com.cronograma.Cesurg.core.domain.SolutionClass</solutionClass>
+<entityClass>com.cronograma.Cesurg.core.domain.entity.TurmaOptaPlanner</entityClass>
+
+<scoreDirectorFactory>
+    <constraintProviderClass>om.cronograma.Cesurg.core.solver.EscalaConstraintProvider</constraintProviderClass>
+</scoreDirectorFactory>
+
+<termination>
+    <secondsSpentLimit>30</secondsSpentLimit>
+</termination>
+</solver>

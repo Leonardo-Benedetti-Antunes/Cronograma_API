@@ -1,9 +1,17 @@
 package com.cronograma.Cesurg.core.domain.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.optaplanner.core.api.domain.entity.PlanningEntity;
+import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
+import java.time.DayOfWeek;
+import java.util.HashSet;
+import java.util.Set;
+
+@PlanningEntity
 @Entity (name = "professor")
 public class Professor {
     @Id
@@ -15,50 +23,50 @@ public class Professor {
     private String descricao;
     @Column (name = "ativo")
     private boolean ativo = true;
-    private boolean segunda;
-    private boolean terca;
-    private boolean quarta;
-    private boolean quinta;
-    private boolean sexta;
+    private boolean disponivelSegunda;
+    private boolean disponivelTerca;
+    private boolean disponivelQuarta;
+    private boolean disponivelQuinta;
+    private boolean disponivelSexta;
 
-    public boolean isSegunda() {
-        return segunda;
+    public boolean isDisponivelSegunda() {
+        return disponivelSegunda;
     }
 
-    public void setSegunda(boolean segunda) {
-        this.segunda = segunda;
+    public void setDisponivelSegunda(boolean disponivelSegunda) {
+        this.disponivelSegunda = disponivelSegunda;
     }
 
-    public boolean isTerca() {
-        return terca;
+    public boolean isDisponivelTerca() {
+        return disponivelTerca;
     }
 
-    public void setTerca(boolean terca) {
-        this.terca = terca;
+    public void setDisponivelTerca(boolean disponivelTerca) {
+        this.disponivelTerca = disponivelTerca;
     }
 
-    public boolean isQuarta() {
-        return quarta;
+    public boolean isDisponivelQuarta() {
+        return disponivelQuarta;
     }
 
-    public void setQuarta(boolean quarta) {
-        this.quarta = quarta;
+    public void setDisponivelQuarta(boolean disponivelQuarta) {
+        this.disponivelQuarta = disponivelQuarta;
     }
 
-    public boolean isQuinta() {
-        return quinta;
+    public boolean isDisponivelQuinta() {
+        return disponivelQuinta;
     }
 
-    public void setQuinta(boolean quinta) {
-        this.quinta = quinta;
+    public void setDisponivelQuinta(boolean disponivelQuinta) {
+        this.disponivelQuinta = disponivelQuinta;
     }
 
-    public boolean isSexta() {
-        return sexta;
+    public boolean isDisponivelSexta() {
+        return disponivelSexta;
     }
 
-    public void setSexta(boolean sexta) {
-        this.sexta = sexta;
+    public void setDisponivelSexta(boolean disponivelSexta) {
+        this.disponivelSexta = disponivelSexta;
     }
 
     public int getId() {
@@ -92,4 +100,5 @@ public class Professor {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
 }
